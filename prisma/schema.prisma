@@ -20,14 +20,13 @@ model Book {
     updatedAt DateTime @updatedAt
 
     // fields
-    title String @default("unknown")
-    ISBN  String @default("000-0-00-000000-0")
+    title String @unique @default("Unknown")
+    ISBN  String @unique @default("000-0-00-000000-0")
 
     // relations
     genres   Genre[]
-    member   Member  @relation(fields: [memberId], references: [id])
-    memberId Int
-    author   Author  @relation(fields: [authorId], references: [id])
+    members  Member[]
+    author   Author   @relation(fields: [authorId], references: [id])
     authorId Int
 }
 
@@ -38,7 +37,7 @@ model Author {
     updatedAt DateTime @updatedAt
 
     // fields
-    name      String @db.VarChar(255)
+    name      String @unique @db.VarChar(255)
     biography String @default("unknown")
 
     // relations
@@ -52,7 +51,7 @@ model Genre {
     updatedAt DateTime @updatedAt
 
     // fields
-    name String @db.VarChar(255)
+    name String @unique @db.VarChar(255)
 
     // relations
     books Book[]
@@ -66,7 +65,7 @@ model Member {
 
     // fields
     name    String @db.VarChar(255)
-    email   String @db.VarChar(255)
+    email   String @unique @db.VarChar(255)
     address String @default("unknown")
 
     // relations

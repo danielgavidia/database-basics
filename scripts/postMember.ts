@@ -1,13 +1,21 @@
-import prisma from "../prismaClient";
+import prisma from "./prismaClient";
 
 const postMember = async () => {
-    const author = await prisma.member.create({
+    const member = await prisma.member.create({
         data: {
             name: "Daniel Gavidia",
             email: "dgavidia1@gmail.com",
+            books: {
+                create: [
+                    {
+                        title: "The Adventures of Huckleberry Finn",
+                        authorId: 6,
+                    },
+                ],
+            },
         },
     });
-    console.log(author);
+    console.log(member);
 };
 
 await postMember();
