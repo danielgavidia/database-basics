@@ -1,17 +1,32 @@
 import prisma from "./prismaClient";
 
-const postBook = async () => {
+interface id {
+    id: number;
+}
+
+interface dataBook {
+    title: string;
+    ISBN: string;
+    authorId: number;
+    genres: {
+        connect: id[];
+    };
+}
+
+const postBook = async (data: dataBook) => {
     const book = await prisma.book.create({
-        data: {
-            title: "The Adventures of Huckleberry Finn",
-            ISBN: "123-1-12-123456-1",
-            authorId: 7,
-            genres: {
-                create: [{ name: "Adventure" }, { name: "Coming of Age" }],
-            },
-        },
+        data: data,
     });
     console.log(book);
 };
 
-await postBook();
+const data = {
+    title: "The Adventures of a Huckleberry Finn",
+    ISBN: "1-123-123456-12-1",
+    authorId: 1,
+    genres: {
+        connect: [{ id: 1 }],
+    },
+};
+
+await postBook(data);

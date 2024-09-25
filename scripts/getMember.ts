@@ -12,4 +12,6 @@ const getMember = async (id: number) => {
     console.log(member);
 };
 
-await getMember(3);
+const id = 4;
+
+await getMember(id);

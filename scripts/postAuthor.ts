@@ -1,13 +1,17 @@
 import prisma from "./prismaClient";
 
-const postAuthor = async () => {
+interface dataAuthor {
+    name: string;
+    biography: string;
+}
+
+const postAuthor = async (data: dataAuthor) => {
     const author = await prisma.author.create({
-        data: {
-            name: "Mark Twain",
-            biography: "Hello",
-        },
+        data: data,
     });
     console.log(author);
 };
 
-await postAuthor();
+const data = { name: "Mark Twain", biography: "Hello" };
+
+await postAuthor(data);

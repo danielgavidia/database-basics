@@ -1,21 +1,36 @@
 import prisma from "./prismaClient";
 
-const postMember = async () => {
+interface book {
+    title: string;
+    authorId: number;
+}
+
+interface dataMember {
+    name: string;
+    email: string;
+    books: {
+        connect: book[];
+    };
+}
+
+const postMember = async (data: dataMember) => {
     const member = await prisma.member.create({
-        data: {
-            name: "Daniel Gavidia",
-            email: "dgavidia1@gmail.com",
-            books: {
-                create: [
-                    {
-                        title: "The Adventures of Huckleberry Finn",
-                        authorId: 6,
-                    },
-                ],
-            },
-        },
+        data: data,
     });
     console.log(member);
 };
 
-await postMember();
+const data = {
+    name: "Daniel Gavidia",
+    email: "dgavidia1@gmail.com",
+    books: {
+        connect: [
+            {
+                title: "The Adventures of a Huckleberry Finn",
+                authorId: 1,
+            },
+        ],
+    },
+};
+
+await postMember(data);
