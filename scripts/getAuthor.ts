@@ -12,4 +12,6 @@ const getAuthor = async (id: number) => {
     console.log(author);
 };
 
-await getAuthor(7);
+const id = 1;
+
+await getAuthor(id);

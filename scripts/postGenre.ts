@@ -1,12 +1,18 @@
 import prisma from "./prismaClient";
 
-const postGenre = async () => {
+interface dataGenre {
+    name: string;
+}
+
+const postGenre = async (data: dataGenre) => {
     const genre = await prisma.genre.create({
-        data: {
-            name: "Coming of Age",
-        },
+        data: data,
     });
     console.log(genre);
 };
 
-await postGenre();
+const data = {
+    name: "Coming of Age",
+};
+
+await postGenre(data);

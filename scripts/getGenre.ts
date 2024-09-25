@@ -12,4 +12,6 @@ const getGenre = async (id: number) => {
     console.log(genre);
 };
 
-await getGenre(3);
+const id = 1;
+
+await getGenre(id);
