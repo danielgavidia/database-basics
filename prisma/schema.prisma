@@ -12,3 +12,64 @@ datasource db {
     provider = "postgresql"
     url      = env("DATABASE_URL")
 }
+
+model Book {
+    // defaults
+    id        Int      @id @default(autoincrement())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    // fields
+    title String @default("unknown")
+    ISBN  String @default("000-0-00-000000-0")
+
+    // relations
+    genres   Genre[]
+    member   Member  @relation(fields: [memberId], references: [id])
+    memberId Int     @unique
+    author   Author  @relation(fields: [authorId], references: [id])
+    authorId Int     @unique
+}
+
+model Author {
+    // defaults
+    id        Int      @id @default(autoincrement())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    // fields
+    name      String @db.VarChar(255)
+    biography String @default("unknown")
+
+    // relations
+    books Book[]
+}
+
+model Genre {
+    // defaults
+    id        Int      @id @default(autoincrement())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    // fields
+    name String @db.VarChar(255)
+
+    // relations
+    book   Book @relation(fields: [bookId], references: [id])
+    bookId Int  @unique
+}
+
+model Member {
+    // defaults
+    id        Int      @id @default(autoincrement())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    // fields
+    name    String @db.VarChar(255)
+    email   String @db.VarChar(255)
+    address String @default("unknown")
+
+    // relations
+    books Book[]
+}
