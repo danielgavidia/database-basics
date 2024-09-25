@@ -23,13 +23,12 @@ model Book {
     title String @unique @default("Unknown")
     ISBN  String @unique @default("000-0-00-000000-0")
 
-    rentedByMemberId Int
-    rentedBy         Member @relation(fields: [rentedByMemberId], references: [id])
-
     // relations
-    genres   Genre[]
-    author   Author  @relation(fields: [authorId], references: [id])
-    authorId Int
+    genres           Genre[]
+    rentedBy         Member  @relation(fields: [rentedByMemberId], references: [id])
+    rentedByMemberId Int
+    author           Author  @relation(fields: [authorId], references: [id])
+    authorId         Int
 }
 
 model Author {

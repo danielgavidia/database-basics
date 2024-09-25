@@ -8,6 +8,7 @@ interface dataBook {
     title: string;
     ISBN: string;
     authorId: number;
+    rentedByMemberId: number;
     genres: {
         connect: id[];
     };
@@ -24,6 +25,7 @@ const data = {
     title: "The Adventures of a Huckleberry Finn",
     ISBN: "1-123-123456-12-1",
     authorId: 1,
+    rentedByMemberId: 1,
     genres: {
         connect: [{ id: 1 }],
     },

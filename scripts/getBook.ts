@@ -12,6 +12,6 @@ const getBook = async (id: number) => {
     console.log(book);
 };
 
-const id = 1;
+const id = 2;
 
 await getBook(id);
