@@ -20,15 +20,14 @@ model Book {
     updatedAt DateTime @updatedAt
 
     // fields
-    title String @default("unknown")
-    ISBN  String @default("000-0-00-000000-0")
+    title String @unique @default("Unknown")
+    ISBN  String @unique @default("000-0-00-000000-0")
 
     // relations
     genres   Genre[]
-    member   Member  @relation(fields: [memberId], references: [id])
-    memberId Int     @unique
-    author   Author  @relation(fields: [authorId], references: [id])
-    authorId Int     @unique
+    members  Member[]
+    author   Author   @relation(fields: [authorId], references: [id])
+    authorId Int
 }
 
 model Author {
@@ -38,7 +37,7 @@ model Author {
     updatedAt DateTime @updatedAt
 
     // fields
-    name      String @db.VarChar(255)
+    name      String @unique @db.VarChar(255)
     biography String @default("unknown")
 
     // relations
@@ -52,11 +51,10 @@ model Genre {
     updatedAt DateTime @updatedAt
 
     // fields
-    name String @db.VarChar(255)
+    name String @unique @db.VarChar(255)
 
     // relations
-    book   Book @relation(fields: [bookId], references: [id])
-    bookId Int  @unique
+    books Book[]
 }
 
 model Member {
@@ -67,9 +65,35 @@ model Member {
 
     // fields
     name    String @db.VarChar(255)
-    email   String @db.VarChar(255)
+    email   String @unique @db.VarChar(255)
     address String @default("unknown")
 
     // relations
     books Book[]
 }
+
+// model Post {
+//   id        Int      @id @default(autoincrement())
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+//   title     String   @db.VarChar(255)
+//   content   String?
+//   published Boolean  @default(false)
+//   author    User     @relation(fields: [authorId], references: [id])
+//   authorId  Int
+// }
+
+// model Profile {
+//   id     Int     @id @default(autoincrement())
+//   bio    String?
+//   user   User    @relation(fields: [userId], references: [id])
+//   userId Int     @unique
+// }
+
+// model User {
+//   id      Int      @id @default(autoincrement())
+//   email   String   @unique
+//   name    String?
+//   posts   Post[]
+//   profile Profile?
+// }

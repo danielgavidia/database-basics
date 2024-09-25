@@ -1,7 +1,7 @@
 import prisma from "./prismaClient";
 
-const getAuthor = async (id: number) => {
-    const author = await prisma.author.findUnique({
+const getGenre = async (id: number) => {
+    const genre = await prisma.genre.findUnique({
         where: {
             id: id,
         },
@@ -9,7 +9,7 @@ const getAuthor = async (id: number) => {
             books: true,
         },
     });
-    console.log(author);
+    console.log(genre);
 };
 
-await getAuthor(7);
+await getGenre(3);
