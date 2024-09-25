@@ -55,8 +55,7 @@ model Genre {
     name String @db.VarChar(255)
 
     // relations
-    book   Book @relation(fields: [bookId], references: [id])
-    bookId Int
+    books Book[]
 }
 
 model Member {

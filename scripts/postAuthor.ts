@@ -1,4 +1,4 @@
-import prisma from "./prismaClient";
+import prisma from "../prismaClient";
 
 const postAuthor = async () => {
     const author = await prisma.author.create({
