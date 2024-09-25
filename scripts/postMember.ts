@@ -8,9 +8,6 @@ interface book {
 interface dataMember {
     name: string;
     email: string;
-    books: {
-        connect: book[];
-    };
 }
 
 const postMember = async (data: dataMember) => {
@@ -21,16 +18,8 @@ const postMember = async (data: dataMember) => {
 };
 
 const data = {
-    name: "Daniel Gavidia",
-    email: "dgavidia1@gmail.com",
-    books: {
-        connect: [
-            {
-                title: "The Adventures of a Huckleberry Finn",
-                authorId: 1,
-            },
-        ],
-    },
+    name: "John Smith",
+    email: "johnsmith@gmail.com",
 };
 
 await postMember(data);
