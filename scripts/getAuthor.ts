@@ -1,9 +1,12 @@
 import prisma from "./prismaClient";
 
-async function main() {
-    // ... you will write your Prisma Client queries here
-    const allBooks = await prisma.author.findMany();
-    console.log(allBooks);
-}
+const getAuthor = async (id: number) => {
+    const author = await prisma.author.findUnique({
+        where: {
+            id: id,
+        },
+    });
+    console.log(author);
+};
 
-await main();
+await getAuthor(7);
